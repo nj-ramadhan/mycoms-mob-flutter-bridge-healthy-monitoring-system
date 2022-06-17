@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "215063335330",
+    "firebase_url": "https://projek-iot-01-default-rtdb.firebaseio.com",
+    "project_id": "projek-iot-01",
+    "storage_bucket": "projek-iot-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215063335330:android:f406493857b3fe5ebfe2fb",
+        "android_client_info": {
+          "package_name": "com.njr.fireflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215063335330-kmekb5ov2or0o8oi8h7on4or2265tq24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnuKZhZLqNkpF47n0udHdt6hWCO0Ks9VU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215063335330-kmekb5ov2or0o8oi8h7on4or2265tq24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
