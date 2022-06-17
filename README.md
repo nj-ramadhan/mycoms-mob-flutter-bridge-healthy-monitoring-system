@@ -1,6 +1,10 @@
 # firebase_app
 
-A new Flutter project.
+A new Flutter project to monitor Accelerometer and Gyroscope Data in Android Devices.
+
+Data sent from ESP32 to Firebase RTDB (Realtime Database)
+Arduino IDE used as programming tool for ESP32 device, arduino code is uploaded in ESP32_MPU6500 folder 
+
 
 ## Getting Started
 
@@ -14,3 +18,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Feature
+
+This app shows accelerometer and gyroscope data line chart in time domain 
+and shows spectogram chart in frequency domain using fft algorithm to generate the data
+
+
