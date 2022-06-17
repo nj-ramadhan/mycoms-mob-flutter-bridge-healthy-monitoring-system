@@ -1,4 +1,4 @@
-# firebase_app
+# flutter - firebase realtime database
 
 A new Flutter project to monitor Accelerometer and Gyroscope Data in Android Devices.
 
@@ -23,5 +23,7 @@ samples, guidance on mobile development, and a full API reference.
 
 This app shows accelerometer and gyroscope data line chart in time domain 
 and shows spectogram chart in frequency domain using fft algorithm to generate the data
+
+This project using fl_chart library to show graph and scidart to do fourier transform functions 
 
 
