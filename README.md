@@ -1,4 +1,6 @@
-# flutter - firebase realtime database
+# SHMS mobile app
+
+flutter - firebase realtime database
 
 A new Flutter project to monitor Accelerometer and Gyroscope Data in Android Devices.
 
