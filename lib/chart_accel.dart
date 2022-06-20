@@ -12,6 +12,16 @@ double _dataAccelX = 0.0;
 double _dataAccelY = 0.0;
 double _dataAccelZ = 0.0;
 
+bool checkAccelX = true;
+bool checkAccelY = true;
+bool checkAccelZ = true;
+
+var colors = [
+  Colors.red,
+  Colors.green,
+  Colors.blue,
+];
+
 class TimeChartAccelPage extends StatefulWidget {
   const TimeChartAccelPage({Key? key}) : super(key: key);
 
@@ -26,7 +36,7 @@ class _TimeChartAccelPage extends State<TimeChartAccelPage> {
   final accelZPoints = <FlSpot>[];
 
   double xValue = 0;
-  double step = 0.5;
+  double step = 0.1;
 
   late Timer timer;
   // Generate some dummy data for the cahrt
@@ -35,7 +45,7 @@ class _TimeChartAccelPage extends State<TimeChartAccelPage> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       while (accelXPoints.length > limitCount) {
         accelXPoints.removeAt(0);
         accelYPoints.removeAt(0);
@@ -53,11 +63,6 @@ class _TimeChartAccelPage extends State<TimeChartAccelPage> {
 
   @override
   Widget build(BuildContext context) {
-    var colors = [
-      Colors.red,
-      Colors.green,
-      Colors.blue,
-    ];
     return Scaffold(
         body: SafeArea(
             child: Container(
@@ -81,25 +86,58 @@ class _TimeChartAccelPage extends State<TimeChartAccelPage> {
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
-                              Text(
-                                '___ X Axis',
-                                style: TextStyle(
-                                  color: Colors.red,
+                            children: [
+                              Row(children: [
+                                Checkbox(
+                                  value: checkAccelX,
+                                  activeColor: colors[0],
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      checkAccelX = newValue!;
+                                    });
+                                  },
                                 ),
-                              ),
-                              Text(
-                                '___ Y Axis',
-                                style: TextStyle(
-                                  color: Colors.green,
+                                const Text(
+                                  'X Axis',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '___ Z Axis',
-                                style: TextStyle(
-                                  color: Colors.blue,
+                              ]),
+                              Row(children: [
+                                Checkbox(
+                                  value: checkAccelY,
+                                  activeColor: colors[1],
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      checkAccelY = newValue!;
+                                    });
+                                  },
                                 ),
-                              ),
+                                const Text(
+                                  'Y Axis',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ]),
+                              Row(children: [
+                                Checkbox(
+                                  value: checkAccelZ,
+                                  activeColor: colors[2],
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      checkAccelZ = newValue!;
+                                    });
+                                  },
+                                ),
+                                const Text(
+                                  'Z Axis',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ]),
                             ]),
                         const SizedBox(
                           height: 40,
@@ -118,6 +156,7 @@ class _TimeChartAccelPage extends State<TimeChartAccelPage> {
                                   isCurved: true,
                                   barWidth: 2,
                                   color: colors[0],
+                                  show: checkAccelX,
                                 ),
                                 // The green line
                                 LineChartBarData(
@@ -125,6 +164,7 @@ class _TimeChartAccelPage extends State<TimeChartAccelPage> {
                                   isCurved: true,
                                   barWidth: 2,
                                   color: colors[1],
+                                  show: checkAccelY,
                                 ),
                                 // The blue line
                                 LineChartBarData(
@@ -132,6 +172,7 @@ class _TimeChartAccelPage extends State<TimeChartAccelPage> {
                                   isCurved: true,
                                   barWidth: 2,
                                   color: colors[2],
+                                  show: checkAccelZ,
                                 )
                               ],
                               titlesData: FlTitlesData(
@@ -217,7 +258,7 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
   var accelZArray = Array([]);
 
   double xValue = 0;
-  double step = 0.5;
+  double step = 0.1;
 
   late Timer timer;
   // Generate some dummy data for the cahrt
@@ -227,7 +268,7 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
   void initState() {
     super.initState();
 
-    timer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       while (accelXArray.length > limitCount) {
         accelXArray.removeAt(0);
         accelYArray.removeAt(0);
@@ -242,28 +283,6 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
       });
       xValue += step;
 
-//      // generate the signals for test
-//      // 1Hz sine wave
-      //  var N = 10.0
-      // var n = limitCount.toDouble();
-      // var n = 100.0;
-      // var fs = 10.0; //sampling freq
-      // var nDomain = linspace(0, n, num: (n * fs).toInt(), endpoint: false);
-      // var f1 = 0.1; // 1Hz
-      // var sg1 = arraySin(arrayMultiplyToScalar(nDomain, 2 * pi * f1));
-      // print(sg1);
-      // print(accelXArray);
-      // var fEstAccelX = freqFromFft(sg1, fs);
-      // var swFr = rfft(sg1);
-      // print(swFr);
-
-      // var swFScale = fftFreq(sg1.length, d: 1 / fs);
-      // print(swFScale);
-      // print(spots);
-      // var fEstAccelX = freqFromFft(sg1, fs);
-      // var fEstAccelY = freqFromFft(sg1, fs);
-      // var fEstAccelZ = freqFromFft(sg1, fs);
-      // var fEstAccelZ = freqFromFft(accelXArray, fs);
       var windowedAccelX = accelXArray * blackmanharris(accelXArray.length);
       var fAccelX = rfft(windowedAccelX);
       var fAbsAccelX = arrayComplexAbs(fAccelX);
@@ -276,17 +295,6 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
       var fAccelZ = rfft(windowedAccelZ);
       var fAbsAccelZ = arrayComplexAbs(fAccelZ);
 
-      // print('fAbs : $fAbs');
-      // print(
-      //     'The original and estimated frequency need be very close each other');
-      // print('Estimated frequency Accel X: $fEstAccelX');
-      // print('Estimated frequency Accel X: $fEstAccelY');
-      // print('Estimated frequency Accel X: $fEstAccelZ');
-
-      // print(rifft(swFr)); // inverse FFT of a real FFT
-
-      // print(dbfft(sg1, fs)); // Return the frequency and fft in DB scale
-
       spotsSGAccelX = fAbsAccelX.asMap().entries.map((e) {
         return FlSpot(e.key.toDouble(), e.value);
       }).toList();
@@ -298,20 +306,11 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
       spotsSGAccelZ = fAbsAccelZ.asMap().entries.map((e) {
         return FlSpot(e.key.toDouble(), e.value);
       }).toList();
-
-      // spotsSGY = fEstAccelY.asMap().entries.map((e) {
-      //   return FlSpot(e.key.toDouble(), e.value);
-      // }).toList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var colors = [
-      Colors.red,
-      Colors.green,
-      Colors.blue,
-    ];
     return Scaffold(
         body: SafeArea(
             child: Container(
@@ -335,25 +334,58 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
-                              Text(
-                                '___ X Axis',
-                                style: TextStyle(
-                                  color: Colors.red,
+                            children: [
+                              Row(children: [
+                                Checkbox(
+                                  value: checkAccelX,
+                                  activeColor: colors[0],
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      checkAccelX = newValue!;
+                                    });
+                                  },
                                 ),
-                              ),
-                              Text(
-                                '___ Y Axis',
-                                style: TextStyle(
-                                  color: Colors.green,
+                                const Text(
+                                  'X Axis',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '___ Z Axis',
-                                style: TextStyle(
-                                  color: Colors.blue,
+                              ]),
+                              Row(children: [
+                                Checkbox(
+                                  value: checkAccelY,
+                                  activeColor: colors[1],
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      checkAccelY = newValue!;
+                                    });
+                                  },
                                 ),
-                              ),
+                                const Text(
+                                  'Y Axis',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ]),
+                              Row(children: [
+                                Checkbox(
+                                  value: checkAccelZ,
+                                  activeColor: colors[2],
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      checkAccelZ = newValue!;
+                                    });
+                                  },
+                                ),
+                                const Text(
+                                  'Z Axis',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ]),
                             ]),
                         const SizedBox(
                           height: 40,
@@ -372,6 +404,7 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
                                   isCurved: true,
                                   barWidth: 2,
                                   color: colors[0],
+                                  show: checkAccelX,
                                 ),
                                 // The green line
                                 LineChartBarData(
@@ -379,6 +412,7 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
                                   isCurved: true,
                                   barWidth: 2,
                                   color: colors[1],
+                                  show: checkAccelY,
                                 ),
                                 // The blue line
                                 LineChartBarData(
@@ -386,6 +420,7 @@ class _FreqChartAccelPage extends State<FreqChartAccelPage> {
                                   isCurved: true,
                                   barWidth: 2,
                                   color: colors[2],
+                                  show: checkAccelZ,
                                 )
                               ],
                               titlesData: FlTitlesData(
